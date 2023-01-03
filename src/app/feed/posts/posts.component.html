@@ -1,0 +1,42 @@
+<section id="profileSection">
+  <label>Welcome, <a class="nav-link" [routerLink]="['profile', user.id]">{{user.username}}</a></label>
+</section>
+
+<section id="postSection">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 box" *ngIf="isCommentCreationVisible != false">
+        <input type="text" size="20" [(ngModel)]="newTitle">
+        <textarea rows="4" cols="50" [(ngModel)]="newBody"></textarea>
+        <button (click)="addPost()" [disabled]="newBody.length==0" [ngStyle]="{'background-color': getBackgroundColor()}">
+          Send
+        </button>
+      </div>
+      <button (click)="onStartAdding()" class='primaryContained float-right' *ngIf="isCommentCreationVisible != true">Add post</button>    
+    </div>
+
+    <div class="row">
+      <div class="col-12" *ngFor="let post of posts | sorting : 'timestamp'; let i = index">
+        <div class="box">
+          <label>by user <a class="nav-link" [routerLink]="['profile', post.userId]">{{post.userId}}</a> at {{post.timestamp}}:</label>
+          <div *ngIf="indexOfEditedPost != i" class="boxElement">
+            {{post.title}}
+          </div>
+          <textarea rows="1" cols="30" *ngIf="indexOfEditedPost == i" [(ngModel)]="editedTitle">{{editedTitle}}</textarea>
+          <div *ngIf="indexOfEditedPost != i" class="boxElement">
+              {{post.body}}
+          </div>
+          <textarea rows="4" cols="50" *ngIf="indexOfEditedPost == i" [(ngModel)]="editedBody">{{editedBody}}</textarea>
+          <button class="buttonsForDeleting" *ngIf="user.id == post.userId && indexOfEditedPost != i" (click)="onDelete(i)">Delete</button>
+          
+          <button class="buttonsForEditing" *ngIf="user.id == post.userId && indexOfEditedPost != i" (click)="onEdit(i)">Edit</button>
+          <button class="buttonsForEditing" *ngIf="indexOfEditedPost == i" (click)="onDoneEditing(i)">Done editing</button>
+          <button class="buttonsForEditing" *ngIf="indexOfEditedPost == i" (click)="resetEditor(i)">Cancel</button>
+
+          <label><a [routerLink]="['comments', post.id]">comments</a></label>
+        </div>
+      </div>
+    </div>
+  </div><!--End Container -->
+</section><!-- end App -->
+  

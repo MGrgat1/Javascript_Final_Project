@@ -1,0 +1,29 @@
+<form class="registracija_form" fxLayout="column" fxLayoutAlign="center center" (submit)="onRegister()" [formGroup]="registerForm">
+
+    <div class = 'registracija_form_title'>Registriraj se:</div>
+
+    <label for="username">Korisnicko ime</label>
+    <fieldset class="form-group">
+            <input type="text" formControlName="username" placeholder="Enter username">
+    </fieldset>
+
+    <label for="password1">Lozinka</label>
+    <fieldset class="form-group">
+        <input type="password" formControlName="password" placeholder="Enter password">
+    </fieldset>
+
+    <label for="name">Ime</label>
+    <fieldset class="form-group">
+            <input type="text" formControlName="name" placeholder="Enter name">
+    </fieldset>
+
+    <label for="name">E-mail</label>
+    <fieldset class="form-group">
+            <input type="text" formControlName="email" placeholder="Enter e-mail">
+    </fieldset>
+
+
+
+    <button id="gumb" type="submit" [disabled]="registerForm.invalid">Submit</button>
+    <div *ngIf="errorMessage">{{errorMessage}}</div>
+</form>

@@ -1,0 +1,38 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-12 box">
+            <label>by user {{post.userId}} at {{post.timestamp}}:</label>
+            <div class="boxElement">
+                {{post.title}}
+            </div>
+            <div class="boxElement">
+                {{post.body}}
+            </div>
+        </div>
+    </div>
+</div><!--End Container -->
+    
+
+<div class="container">
+    <div class="row">
+        <h1>
+            Comments({{getNumberOfComments()}}):
+        </h1>
+        <div class="col-12 box" *ngFor="let comment of comments; let i = index">
+            <label>by user {{comment.userId}} at {{comment.timestamp}}:</label>
+            <div class="boxElement">
+                {{comment.body}}
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-12 box" *ngIf="isCommentCreationVisible != false">
+            <textarea  rows="4" cols="50" [(ngModel)]="newBody"></textarea>            
+            <button (click)="onAdd()" [disabled]="newBody.length==0" [ngStyle]="{'background-color': getBackgroundColor()}">Send</button>
+        </div>
+        <button (click)="onStartAdding()" class='primaryContained float-right' *ngIf="isCommentCreationVisible != true">Add comment</button>    
+    </div>
+</div><!--End Container -->
+    

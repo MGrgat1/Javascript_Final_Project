@@ -1,0 +1,15 @@
+<h1>Send a message to user {{recipientId}}:</h1>
+<section id="sendMessageSection">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 box">      
+            <label>Subject:</label><input type="text" size="20" [(ngModel)]="newSubject">
+            <textarea rows="4" cols="50" [(ngModel)]="newBody"></textarea>
+            <button (click)="onSend()" [ngStyle]="{'background-color': getBackgroundColor()}">
+            Send
+          </button>
+        </div>
+        <label *ngIf="messageSent != false">Message sent!</label>
+      </div>
+    </div>
+</section>

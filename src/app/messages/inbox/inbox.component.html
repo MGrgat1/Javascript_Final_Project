@@ -1,0 +1,40 @@
+<table class="table table-striped">
+  <tr>
+    <h3>Contact other users:</h3>
+  </tr>
+  <tr>
+      <th>Username</th>
+      <th>Name</th>
+      <th>E-mail</th>
+  </tr>
+  <tr *ngFor="let user of users">
+      <th><a [routerLink]="['../profile', user.id]">{{user.username}}</a></th>
+      <th>{{user.name}}</th>
+      <th>{{user.email}}</th>
+      <th>
+          <label><a [routerLink]="['../messages', user.id]">Send message</a></label>
+      </th>
+  </tr>
+</table>
+
+<section class="container">  
+  <h1>Incoming messages:</h1>
+  <div class="row">
+    <div class="col-12" *ngFor="let message of messages ; let i = index">
+      <div class="box">
+        <label>from <a class="nav-link" [routerLink]="['../profile', message.senderId]">{{message.senderId}}</a> at {{message.timestamp}}:</label>
+        <div  class="boxElement">
+          {{message.subject}}
+        </div>
+        <div  class="boxElement">
+          {{message.body}}
+        </div>
+        <button class="buttonsForDeleting" (click)="onDelete(i)">Delete</button>
+        
+      </div>
+      <label><a [routerLink]="['../messages', message.senderId]">Reply</a></label>
+    </div>
+  </div>
+  
+</section>
+

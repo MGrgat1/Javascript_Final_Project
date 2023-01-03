@@ -1,0 +1,42 @@
+<div *ngIf="!accountActive">
+  This account has been removed
+</div>
+
+
+<div *ngIf="accountActive" class="container">
+  <h3>Profil:</h3>
+  <table class="table">
+      <tr class="row">
+          <th class="cell">Username</th>
+          <th class="cell">Name</th>
+          <th class="cell">E-mail</th>
+          <th class="cell">Level</th>
+      </tr>
+      <tr class="row">    
+        <td class="cell">{{selectedUser.username}}</td>
+        <td class="cell">{{selectedUser.name}}</td>
+        <td class="cell">{{selectedUser.email}}</td>
+        <td class="cell">{{selectedUser.level==1 ? 'Admin' : 'User'}}</td>
+      </tr>
+  </table>
+  <div class="box">
+    <a [routerLink]="['../../messages', selectedUser.id]">Direct message</a>
+  </div>
+
+  <label>Posts:</label>
+  <div class="row">
+    <div class="col-12" *ngFor="let post of posts; let i = index">
+      <div class="box" *ngIf="selectedUser.id == post.userId">
+        <label>by {{selectedUser.username}} at {{post.timestamp}}:</label>
+        <div *ngIf="indexOfEditedPost != i" class="boxElement">
+          {{post.title}}
+        </div>
+        <div *ngIf="indexOfEditedPost != i" class="boxElement">
+            {{post.body}}
+        </div>
+        <label><a [routerLink]="['../../comments', post.id]">Comments</a></label>
+      </div>
+    </div>
+  </div>
+</div>
+

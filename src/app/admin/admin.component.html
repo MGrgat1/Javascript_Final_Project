@@ -1,0 +1,22 @@
+<h3>User list:</h3>
+<table class="table table-striped">
+    <tr>
+        <th>Username</th>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Level</th>
+        <th>Delete</th>
+    </tr>
+    <tr *ngFor="let user of users">
+        <th><a [routerLink]="['../profile', user.id]">{{user.username}}</a></th>
+        <th>{{user.name}}</th>
+        <th>{{user.email}}</th>
+        <th>{{user.level==1 ? 'Admin' : 'User'}}</th>
+        <th>
+            <button class="btn" (click)="deleteUser(user.id)">Delete</button>
+        </th>
+        <th>
+            <label><a [routerLink]="['../messages', user.id]">Send message</a></label>
+        </th>
+    </tr>
+</table>
